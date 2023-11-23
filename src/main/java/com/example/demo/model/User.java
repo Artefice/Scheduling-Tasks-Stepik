@@ -3,24 +3,20 @@ package com.example.demo.model;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @Entity
-public class Task {
+@Table(name = "\"User\"")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private LocalDate date;
-    private String description;
-    private boolean done;
+    private String login;
+    private String password;
 
     @Override
     public final boolean equals(Object o) {
@@ -29,8 +25,8 @@ public class Task {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Task task = (Task) o;
-        return Objects.equals(getId(), task.getId());
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
     }
 
     @Override
