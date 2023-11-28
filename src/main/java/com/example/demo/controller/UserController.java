@@ -10,17 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
 public class UserController {
     private final UserService service;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public User create(@RequestBody User user) {
-        return service.create(user);
+        User saved = service.create(user);
+        saved.setPassword(null);
+        return saved;
     }
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public User getCurrent() {
-        return service.getCurrentUser();
+        User user = service.getCurrentUser();
+        user.setPassword(null);
+        return user;
     }
 }

@@ -21,6 +21,7 @@ public class Task {
     private LocalDate date;
     private String description;
     private boolean done;
+    private long user_id;
 
     @Override
     public final boolean equals(Object o) {
